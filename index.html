@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Web Wizard - Universal Web Creator</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #1a1a2e, #16213e);
+      color: #ffffff;
+      overflow-x: hidden;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 2rem 5%;
+      background-color: rgba(0, 0, 0, 0.3);
+    }
+
+    header h1 {
+      font-size: 2rem;
+      background: linear-gradient(90deg, #00f5a0, #00d9f5);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: slideIn 1s ease-out;
+    }
+
+    nav a {
+      color: white;
+      margin-left: 1.5rem;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    nav a:hover {
+      color: #00f5a0;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 6rem 2rem 3rem;
+      animation: fadeIn 2s ease-out;
+      position: relative;
+    }
+
+    .hero h2 {
+      font-size: 2.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .word-swap {
+      font-weight: bold;
+      color: #00f5a0;
+      transition: opacity 1s ease;
+    }
+
+    .word-swap.fade {
+      opacity: 0;
+    }
+
+    .door-container {
+      display: inline-block;
+      margin-top: 1rem;
+      width: 70px;
+      height: 90px;
+      background-color: #00f5a0;
+      border: 3px solid #ffffff;
+      border-radius: 5px;
+      animation: shakeDoor 1s infinite ease-in-out, openDoorLoop 5s infinite ease-in-out;
+      transform-origin: left center;
+    }
+
+    @keyframes shakeDoor {
+      0%, 100% { transform: rotate(0); }
+      20% { transform: rotate(2deg); }
+      40% { transform: rotate(-2deg); }
+      60% { transform: rotate(2deg); }
+      80% { transform: rotate(-2deg); }
+    }
+
+    @keyframes openDoorLoop {
+      0%, 30% { transform: rotate(0); }
+      50% { transform: rotate(-80deg); }
+      80%, 100% { transform: rotate(0); }
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      max-width: 700px;
+      margin: 1.5rem auto 2rem auto;
+      color: #ccc;
+    }
+
+    .cta-btn {
+      padding: 0.9rem 1.8rem;
+      font-size: 1rem;
+      background-color: #00f5a0;
+      border: none;
+      border-radius: 30px;
+      color: black;
+      cursor: pointer;
+      animation: shakeColor 2s infinite ease-in-out;
+      transition: transform 0.3s ease;
+    }
+
+    .cta-btn:hover {
+      transform: scale(1.1);
+    }
+
+    @keyframes shakeColor {
+      0% { transform: translateX(0); background-color: #00f5a0; }
+      20% { transform: translateX(-3px); background-color: #00d9f5; }
+      40% { transform: translateX(3px); background-color: #f5c400; }
+      60% { transform: translateX(-3px); background-color: #ff5e5e; }
+      80% { transform: translateX(3px); background-color: #00f5a0; }
+      100% { transform: translateX(0); background-color: #00f5a0; }
+    }
+
+    .services {
+      padding: 4rem 2rem;
+      background: #0f0f2d;
+      text-align: center;
+      animation: fadeInUp 1.5s ease-out;
+    }
+
+    .services h3 {
+      font-size: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .card {
+      display: inline-block;
+      background: #1f1f3f;
+      padding: 2rem;
+      margin: 1rem;
+      border-radius: 20px;
+      max-width: 280px;
+      box-shadow: 0 0 20px rgba(0,255,200,0.2);
+      transition: transform 0.4s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+    }
+
+    .card h4 {
+      margin-bottom: 1rem;
+      color: #00f5a0;
+    }
+
+    .card p {
+      font-size: 0.95rem;
+      color: #ccc;
+    }
+
+    .reveal-btn {
+      margin-top: 3rem;
+      padding: 1rem 2rem;
+      font-size: 1.1rem;
+      font-weight: bold;
+      border: none;
+      border-radius: 40px;
+      cursor: pointer;
+      color: white;
+      background: linear-gradient(45deg, #00f5a0, #00d9f5, #ff9aee, #f5c400);
+      background-size: 300% 300%;
+      animation: glowPulse 4s ease infinite, colorShift 6s ease infinite;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.3), 0 0 40px rgba(0, 245, 160, 0.3);
+      transition: transform 0.3s ease;
+    }
+
+    .reveal-btn:hover {
+      transform: scale(1.08);
+      box-shadow: 0 0 30px rgba(255, 255, 255, 0.6), 0 0 60px rgba(0, 245, 160, 0.5);
+    }
+
+    @keyframes glowPulse {
+      0%, 100% { box-shadow: 0 0 20px rgba(255, 255, 255, 0.3); }
+      50% { box-shadow: 0 0 30px rgba(255, 255, 255, 0.6); }
+    }
+
+    @keyframes colorShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .surprise {
+      display: none;
+      margin-top: 2rem;
+      background: #292959;
+      color: #fff;
+      padding: 2rem;
+      border-radius: 20px;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+      box-shadow: 0 0 20px rgba(0, 245, 160, 0.3);
+      opacity: 0;
+      transform: translateY(30px);
+      animation: reveal 2s ease-in-out forwards;
+    }
+
+    .surprise.show {
+      display: block;
+    }
+
+    @keyframes reveal {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    footer {
+      padding: 2rem;
+      text-align: center;
+      background-color: #111;
+      font-size: 0.9rem;
+      color: #888;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateX(-100px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Web Wizard</h1>
+    <nav>
+      <a href="#services">Services</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h2>
+      I build web files that <span class="word-swap" id="swapWord">open</span>
+    </h2>
+    <div class="door-container"></div>
+    <p>Fully responsive, browser-friendly websites built with HTML, CSS, and JavaScript. I create fast, elegant, and universal designs that work flawlessly on any device or browser.</p>
+    <button class="cta-btn" onclick="scrollToContact()">Let’s Work Together</button>
+  </section>
+
+  <section class="services" id="services">
+    <h3>My Services</h3>
+    <div class="card">
+      <h4>Universal Web Files</h4>
+      <p>Pure HTML/CSS/JS files that load perfectly on all modern and legacy browsers.</p>
+    </div>
+    <div class="card">
+      <h4>Animated Designs</h4>
+      <p>Engaging, beautiful animations that catch attention and increase interaction.</p>
+    </div>
+    <div class="card">
+      <h4>Performance Optimized</h4>
+      <p>Web pages built to load fast with clean code and no unnecessary bloat.</p>
+    </div>
+    <div class="card">
+      <h4>🎉 Surprise Websites</h4>
+      <p>Custom surprises and secret touches for special people eg. birthday and wedding animated suprise messeges and nice looking animated pages for you partner</p>
+    </div>
+
+    <button class="reveal-btn" onclick="toggleSurprise()">🏱 Reveal Secret Message</button>
+
+    <div class="surprise" id="surpriseMessage">
+      <h4>🎁 Secret Message for My Special Clients</h4>
+      <p>You’re not just clients – you're visionaries. Thank you for trusting me to build your ideas on the web. Here’s to creating magic together, pixel by pixel!</p>
+    </div>
+  </section>
+
+  <footer id="contact">
+    <p>Email: <strong>kimu09926@gmail.com</strong></p>
+    <p>Username: <strong>@Godenkim</strong></p>
+    <p>Phone: <strong>0721635810</strong></p>
+    <p>&copy; 2025 Web Wizard - All Rights Reserved</p>
+  </footer>
+
+  <script>
+    function scrollToContact() {
+      document.getElementById("contact").scrollIntoView({ behavior: "smooth" });
+    }
+
+    const swapWord = document.getElementById("swapWord");
+    let showingOpen = true;
+
+    setInterval(() => {
+      swapWord.classList.add("fade");
+      setTimeout(() => {
+        swapWord.textContent = showingOpen ? "anywhere" : "open";
+        swapWord.classList.remove("fade");
+        showingOpen = !showingOpen;
+      }, 1000);
+    }, 2000);
+
+    function toggleSurprise() {
+      const surprise = document.getElementById("surpriseMessage");
+      surprise.classList.toggle("show");
+    }
+  </script>
+</body>
+</html>
